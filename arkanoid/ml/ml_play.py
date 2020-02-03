@@ -41,9 +41,9 @@ def ml_loop():
 		inp_temp = np.array([scene_info.ball[0], scene_info.ball[1], scene_info.platform[0]])
 		input = inp_temp[np.newaxis, :]
 		# 3.4. Send the instruction for this frame to the game process
-		if load_model.predict(input) > 0:
+		if load_model.predict(input) == 1:
 			comm.send_instruction(scene_info.frame, GameInstruction.CMD_RIGHT)
-		elif load_model.predict(input) < 0:
+		elif load_model.predict(input) == -1:
 			comm.send_instruction(scene_info.frame, GameInstruction.CMD_LEFT)
 		else:
 			comm.send_instruction(scene_info.frame, GameInstruction.CMD_NONE)
